@@ -2,36 +2,52 @@ import express from 'express';
 import path from 'path';
 import Web3 from 'web3';
 import bodyParser from 'body-parser';
+import fetch from 'node-fetch';
+import fs from 'fs';
 import config from './config.js';
 import secret from './secret.js'
-import fs from 'fs';
-
 
 const app = express();
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
+const newKey = () => {
+  return "NEW";
+}
 //mount the 2 folders to static
 app.use('/static', express.static('static'));
 app.use('/static', express.static('dist'));
 
 app.post('/submit',function(req, res) {
-  if (!req.body['g-recaptcha-response']) {
-    return res.json({
-      "responseCode" : 1,
-      "responseDesc" : "Please select captcha",
-    });
-  }
+  if (!req.body['g-recaptcha-response'])
+    return res.status(400);
+
   let secretKey = config.recaptcha;
-  // req.connection.remoteAddress will provide IP address of connected user.
   let verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body['g-recaptcha-response']}&remoteip=${req.connection.remoteAddress}`;
-  // Hitting GET request to the URL, Google will respond with success or error scenario.
-  request(verificationUrl,function(error,response,body) {
+  request(verificationUrl, (err, response, body) => {
     body = JSON.parse(body);
-    // Success will be true or false depending upon captcha validation.
-    if(body.success !== undefined && !body.success) {
-      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
+    if (!body.success) {
+      return res.status(400);
     }
-    res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+    res.status(200);
+  });
+
+  fetch(verificationUrl)
+  .then(function(resp) {
+      let body = res.body.json()
+      body.then(success => {
+
+        //if properly filled out & successful
+        if (success) {
+          return res.json({
+            key: newKey(),
+          })
+        } else {
+          return res.status(400);
+        }
+      }, err => {
+
+        //failed parsing
+        return res.status(400);
+      })
   });
 });
 

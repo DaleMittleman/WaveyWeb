@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wavey Web Portal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Wavey Web Portal
+      </h1>
+      <p class="subtitle">
+        Complete the form below to get started.
+      </p>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Handle</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input">
+        </div>
+      </div>
+      <div class="field">
+        <div class="g-recaptcha" data-sitekey="6Le_xjsUAAAAABp5zSzmBM9qhB7s7pvzO2Na_GNo"></div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox">
+            I agree to the <a href="#">terms and conditions</a>
+          </label>
+        </div>
+      </div>
+      <div class="control">
+        <button class="button is-link">Next</button>
+      </div>
+    </div>
+    <script>
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+      }
+
+      web3.eth.defaultAccount = web3.eth.accounts[0];
+      console.log(web3.eth.defaultAccount);
+      var WNSContract = web3.eth.contract(0x9b0727acc4113520c2e69e24c5174a98516066c4);
+      var wns = WNSContract.at(0x9b0727acc4113520c2e69e24c5174a98516066c4);
+      console.log(wns);
+    </script>
+    <script src="http://www.google.com/recaptcha/api.js"></script>
+  </section>
+  </body>
+</html>

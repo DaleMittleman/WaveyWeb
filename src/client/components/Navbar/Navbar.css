@@ -1,0 +1,127 @@
+#navbar {
+    box-shadow: 0px 1px 0px 0px #2b4460;
+    padding: 2px 2vw;
+    z-index: 3;
+    background-color: #3373dc;
+}
+
+#navbar-logo {
+    width: 90px;
+    margin: auto;
+    margin-top: 5px;
+    height: 32px;
+}
+
+#navbar-search {
+    width: 100%;
+    padding: 6px;
+    height: 42px;
+}
+
+#search {
+    background-color: white;
+    top: -5px;
+    position: relative;
+    border-radius: 0px 0px 5px 5px;
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+#search-block {
+    position: fixed;
+    top: 57px;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0px;
+    width: 100vw;
+    height: calc(100vh - 57px);
+}
+
+.search-section {
+    padding: 10px 10px;
+    font-size: 16px;
+}
+.search-info {
+    font-size: 16px;
+    font-weight: bold;
+}
+.search-time {
+    font-weight: bold;
+    color: #3273dc;
+}
+.search-instructors {
+    margin-left: 10px;
+}
+.search-section:hover {
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+.collision {
+  color: red !important;
+}
+
+
+#small-logo {
+    margin: auto;
+}
+
+#navbar-search > input {
+    height: 42px;
+    width: 100%;
+    font-size: 16px;
+    text-indent: 5px;
+    border: none;
+    outline: none;
+}
+
+#navbar-burger {
+    width: auto;
+}
+
+#navbar-rand {
+    font-size: 16px;
+    height: 43px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+    color: #3373dc;
+}
+
+#navbar-rand > input:focus {
+  background-color: white;
+}
+
+#navbar-rand:hover {
+    background-color: #f1f1f1;
+}
+
+.menuitem {
+    font-size: 18px;
+    color: white;
+}
+
+.navbar-item p > i {
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    #navbar {
+        padding: 2px 5vw;
+        position: fixed;
+        top: 0px;
+        width: 100vw;
+    }
+    #navbar-logo {
+        margin: auto;
+    }
+    #navbar-search {
+        margin-left: 2%;
+        height: 42px;
+        width: 600px;
+    }
+    #navbar-search > input {
+        height: 42px;
+        text-indent: 10px;
+        border-radius: 5px;
+    }
+}
